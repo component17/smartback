@@ -31,9 +31,16 @@ let data = {
         {
             namespace: 'onAll',
             textUp: 'Весь свет',
-            textDown: 'вкл/выкл',
+            textDown: 'вкл',
             icon: 'on_off.svg',
             cell: 4
+        },
+        {
+            namespace: 'offAll',
+            textUp: 'Весь свет',
+            textDown: 'выкл',
+            icon: 'on_off.svg',
+            cell: 9
         },
         {
             namespace: 'onLineOne',
@@ -227,6 +234,44 @@ function sendMessage(data){
 const fns = {
     onKitchen(){
         setGPIO('kitchen')
+    },
+
+    onBoss(){
+        setGPIO('boss')
+    },
+
+    onAll(){
+        setGPIO('lineOne', false);
+        setGPIO('lineTwo', false);
+        setGPIO('kitchen', false);
+        setGPIO('boss', false);
+    },
+
+    offAll(){
+        setGPIO('lineOne', true);
+        setGPIO('lineTwo', true);
+        setGPIO('kitchen', true);
+        setGPIO('boss', true);
+    },
+
+    onLineOne(){
+        setGPIO('lineOne');
+    },
+
+    flashLineOne(){
+        setGPIO('lineOne');
+    },
+
+    onLineTwo(){
+        setGPIO('lineTwo');
+    },
+
+    flashLineTwo(){
+        setGPIO('lineTwo');
+    },
+
+    disco(){
+        setGPIO('lineTwo');
     }
 };
 
