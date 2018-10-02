@@ -148,9 +148,9 @@ io.on('connection', (socket) => {
         fns[key]();
     })
 
-    socket.on('updateGPIO', ({key, value}) => {
-        // console.log(999, key, value)
-        // updateIndicators(key, value);
+    socket.on('updateGPIO', ({namespace, val}) => {
+        console.log(999, namespace, val)
+        updateIndicators(namespace, val);
     })
 
 });
