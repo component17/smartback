@@ -205,7 +205,7 @@ function setGPIO(key, val = undefined){
         value = val;
     }
 
-    actuator.emit('setGPIO', value);
+    actuator.emit('setGPIO', {namespace: key, value});
 }
 
 // Отправка сообщения
