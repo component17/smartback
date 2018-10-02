@@ -199,6 +199,7 @@ function initClient(socket) {
 }
 
 function updateIndicators(key, val){
+    console.log(777, key, val);
     data.indicators[key].value = val;
     io.sockets.emit('updateIndicators', data.indicators);
 }
