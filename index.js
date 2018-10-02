@@ -143,6 +143,11 @@ io.on('connection', (socket) => {
 
     });
 
+    socket.on('actions', (key) => {
+        console.log('actions', key);
+        fns[key]();
+    })
+
 });
 
 
@@ -158,7 +163,7 @@ function initActuator(){
         sendMessage({
             date,
             source: 'Smart office',
-            text: 'Исполнительное утсройство подключенно',
+            text: 'Исполнительное утсройство подключено',
             type: 'success'
         });
 
@@ -175,7 +180,7 @@ function initActuator(){
         sendMessage({
             date,
             source: 'Smart office',
-            text: 'Исполнительное утсройство отключенно!!! (' + reason + ')',
+            text: 'Исполнительное утсройство отключено!!! (' + reason + ')',
             type: 'error'
         });
 
@@ -212,5 +217,11 @@ function setGPIO(key, val = undefined){
 function sendMessage(data){
     io.sockets.emit('message', data);
 }
+
+const fns = {
+    onKitchen(){
+        setGPIO('kitchen')
+    }
+};
 
 server.listen(8080);
