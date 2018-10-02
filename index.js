@@ -75,25 +75,25 @@ let data = {
     widgets: {
         serverUPoint: {
             title: 'Сервер UPoint',
-            icon: 'test',
+            icon: 'server.svg',
             value: 'ДОСТУПЕН',
             type: 'success'
         },
         balanceJelastic: {
             title: 'Баланс Jelastic',
-            icon: 'test',
+            icon: 'balance.svg',
             value: '1 546.00',
             type: 'success'
         },
         usersUPointCount: {
             title: 'Пользователи UPoint',
-            icon: 'test',
+            icon: 'users.svg',
             value: '30',
             type: 'default'
         },
         usersUPointOnLine: {
             title: 'Пользователи ONLINE',
-            icon: 'test',
+            icon: 'online.svg',
             value: '12',
             type: 'success'
         },
