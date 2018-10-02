@@ -213,10 +213,4 @@ function sendMessage(data){
     io.sockets.emit('message', data);
 }
 
-
-setInterval(() => {
-    setGPIO('kitchen')
-}, 5000);
-
-
 server.listen(8080);
