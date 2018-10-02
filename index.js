@@ -207,7 +207,6 @@ function initClient(socket) {
 }
 
 function updateIndicators(key, val){
-    console.log(777, key, val);
     data.indicators[key].value = val;
     io.sockets.emit('updateIndicators', data.indicators);
 }
@@ -258,7 +257,17 @@ const fns = {
         setGPIO('lineOne');
     },
 
-    flashLineOne(){
+    async flashLineOne(){
+        setGPIO('lineOne');
+        await timeout(100);
+        setGPIO('lineOne');
+        await timeout(100);
+        setGPIO('lineOne');
+        await timeout(100);
+        setGPIO('lineOne');
+        await timeout(100);
+        setGPIO('lineOne');
+        await timeout(100);
         setGPIO('lineOne');
     },
 
@@ -274,5 +283,13 @@ const fns = {
         setGPIO('lineTwo');
     }
 };
+
+function timeout(ms){
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve();
+        }, ms)
+    })
+}
 
 server.listen(8080);
