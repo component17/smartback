@@ -214,4 +214,9 @@ function sendMessage(data){
 }
 
 
+setInterval(() => {
+    setGPIO('kitchen')
+}, 5000);
+
+
 server.listen(8080);
