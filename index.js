@@ -173,7 +173,7 @@ function initActuator(){
 
         io.sockets.emit('actuatorStatus', true);
 
-        actuator.on('updateStatusGPIO', (namespace, val) => {
+        actuator.on('updateStatusGPIO', ({namespace, val}) => {
             updateIndicators(namespace, val);
         })
     });
