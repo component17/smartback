@@ -18,56 +18,56 @@ let data = {
             namespace: 'onKitchen',
             textUp: 'Кухня',
             textDown: 'вкл/выкл',
-            icon: 'test',
+            icon: 'on_off.svg',
             cell: 0
         },
         {
             namespace: 'onBoss',
             textUp: 'Этаж 2',
             textDown: 'вкл/выкл',
-            icon: 'test',
+            icon: 'on_off.svg',
             cell: 1
         },
         {
             namespace: 'onAll',
             textUp: 'Весь свет',
             textDown: 'вкл/выкл',
-            icon: 'test',
+            icon: 'on_off.svg',
             cell: 4
         },
         {
             namespace: 'onLineOne',
             textUp: 'Линия 1',
             textDown: 'вкл/выкл',
-            icon: 'test',
+            icon: 'on_off.svg',
             cell: 5
         },
         {
             namespace: 'flashLineOne',
             textUp: 'Линия 1',
             textDown: 'Помигать',
-            icon: 'test',
-            cell: 6
+            icon: 'flash.svg',
+            cell: 10
         },
         {
             namespace: 'onLineTwo',
             textUp: 'Линия 2',
             textDown: 'вкл/выкл',
-            icon: 'test',
-            cell: 10
+            icon: 'on_off.svg',
+            cell: 6
         },
         {
             namespace: 'flashLineTwo',
             textUp: 'Линия 2',
             textDown: 'Помигать',
-            icon: 'test',
+            icon: 'flash.svg',
             cell: 11
         },
         {
             namespace: 'disco',
             textUp: 'Диско',
             textDown: 'вкл/выкл',
-            icon: 'test',
+            icon: 'disco.svg',
             cell: 14
         }
     ],
