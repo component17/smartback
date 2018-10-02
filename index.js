@@ -148,6 +148,10 @@ io.on('connection', (socket) => {
         fns[key]();
     })
 
+    socket.on('updateGPIO', ({key, value}) => {
+        updateIndicators(key, value);
+    })
+
 });
 
 
