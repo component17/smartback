@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "mosca": "^2.8.3",
+    "request": "^2.88.0",
     "socket.io": "^2.1.1"
   }
 }

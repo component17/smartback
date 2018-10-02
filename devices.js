@@ -23,7 +23,7 @@ module.exports = [
     {
         namespace: 'boss',
         name: 'Этаж 2',
-        gpio: 12,
+        gpio: 26,
         default: true,
         indicator: 3
     },

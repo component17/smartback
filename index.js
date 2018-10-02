@@ -1,6 +1,8 @@
 const server = require('http').createServer();
 const devices = require('./devices');
+const request = require('request');
 
+//serverData();
 
 let indicators = {};
 
@@ -232,7 +234,7 @@ function sendMessage(data){
 
 const fns = {
     onKitchen(){
-        setGPIO('kitchen')
+        setGPIO('kitchen');
     },
 
     onBoss(){
@@ -299,6 +301,20 @@ function timeout(ms){
         setTimeout(() => {
             resolve();
         }, ms)
+    })
+}
+
+function serverData(){
+    serverRequest();
+    setInterval(() => {
+        serverRequest()
+    }, 1000 * 60 * 60)
+}
+
+function serverRequest(){
+    request('http://upoint-rest.jelastic.regruhosting.ru/api/jelastic/youisaliv', (error, response, body) => {
+        console.log(body)
+
     })
 }
 
