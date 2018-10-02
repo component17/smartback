@@ -275,7 +275,17 @@ const fns = {
         setGPIO('lineTwo');
     },
 
-    flashLineTwo(){
+    async flashLineTwo(){
+        setGPIO('lineTwo');
+        await timeout(100);
+        setGPIO('lineTwo');
+        await timeout(100);
+        setGPIO('lineTwo');
+        await timeout(100);
+        setGPIO('lineTwo');
+        await timeout(100);
+        setGPIO('lineTwo');
+        await timeout(100);
         setGPIO('lineTwo');
     },
 
