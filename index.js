@@ -149,6 +149,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('updateGPIO', ({key, value}) => {
+        console.log(999, key, value)
         updateIndicators(key, value);
     })
 
