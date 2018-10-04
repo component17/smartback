@@ -18,17 +18,17 @@ let data = {
     actions: [
         {
             namespace: 'onKitchen',
-            textUp: 'Кухня',
-            textDown: 'вкл/выкл',
-            icon: 'on_off.svg',
-            cell: 0
-        },
-        {
-            namespace: 'onBoss',
-            textUp: 'Этаж 2',
+            textUp: 'Кухня 2/3',
             textDown: 'вкл/выкл',
             icon: 'on_off.svg',
             cell: 1
+        },
+        {
+            namespace: 'onBoss',
+            textUp: 'Кухня 1/3',
+            textDown: 'вкл/выкл',
+            icon: 'on_off.svg',
+            cell: 0
         },
         {
             namespace: 'onAll',

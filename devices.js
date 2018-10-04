@@ -15,14 +15,14 @@ module.exports = [
     },
     {
         namespace: 'kitchen',
-        name: 'Кухня',
+        name: 'Кухня 2/3',
         gpio: 21,
         default: true,
         indicator: 2
     },
     {
         namespace: 'boss',
-        name: 'Этаж 2',
+        name: 'Кухня 1/3',
         gpio: 26,
         default: true,
         indicator: 3
