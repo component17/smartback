@@ -1,12 +1,35 @@
-const server = require('http').createServer();
 const devices = require('./devices');
 const request = require('request');
+
+const requestHandler = (request, response) => {
+    console.log(request.method, request.url);
+
+    response.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
+
+    switch (request.url) {
+        case '/siri/all/on':
+            fns.onAll();
+            response.end('Свет включен');
+            break;
+
+        case '/siri/all/off':
+            fns.offAll();
+            response.end('Свет выключен');
+            break;
+        default:
+            response.end('Неизвестная команда');
+    }
+};
+
+const serverRest = require('http').createServer(requestHandler);
+
+const serverWs = require('http').createServer();
 
 //serverData();
 
 let indicators = {};
 
-for(let i in devices){
+for (let i in devices) {
     indicators[devices[i].namespace] = {
         index: i,
         title: devices[i].name,
@@ -120,7 +143,7 @@ let data = {
     indicators
 };
 
-const io = require('socket.io')(server, {
+const io = require('socket.io')(serverWs, {
     path: '/',
     serveClient: false,
     pingInterval: 10000,
@@ -135,14 +158,14 @@ io.on('connection', (socket) => {
 
     console.log('CONNECTION', socket.id, socket.handshake.query);
 
-    if(socket.handshake.query.token !== '27122712'){
+    if (socket.handshake.query.token !== '27122712') {
         socket.disconnect(true);
     }
 
-    if(socket.handshake.query.device === 'actuator'){
+    if (socket.handshake.query.device === 'actuator') {
         actuator = socket;
         initActuator()
-    }else{
+    } else {
         initClient(socket)
     }
 
@@ -166,7 +189,7 @@ io.on('connection', (socket) => {
 
 
 // Инициализация исполнительного устройства
-function initActuator(){
+function initActuator() {
     actuator.emit('initActuator', data.devices);
 
     actuator.once('actuatorReady', () => {
@@ -208,19 +231,19 @@ function initClient(socket) {
     socket.emit('clientInit', data);
 }
 
-function updateIndicators(key, val){
+function updateIndicators(key, val) {
     data.indicators[key].value = val;
     io.sockets.emit('updateIndicators', data.indicators);
 }
 
-function updateWidgets(key, val){
+function updateWidgets(key, val) {
     data.widgets[key].value = val;
     io.sockets.emit('updateWidgets', data.widgets);
 }
 
-function setGPIO(key, val = undefined){
+function setGPIO(key, val = undefined) {
     let value = !data.indicators[key].value;
-    if(val !== undefined){
+    if (val !== undefined) {
         value = val;
     }
 
@@ -228,38 +251,38 @@ function setGPIO(key, val = undefined){
 }
 
 // Отправка сообщения
-function sendMessage(data){
+function sendMessage(data) {
     io.sockets.emit('message', data);
 }
 
 const fns = {
-    onKitchen(){
+    onKitchen() {
         setGPIO('kitchen');
     },
 
-    onBoss(){
+    onBoss() {
         setGPIO('boss')
     },
 
-    onAll(){
+    onAll() {
         setGPIO('lineOne', false);
         setGPIO('lineTwo', false);
         setGPIO('kitchen', false);
         setGPIO('boss', false);
     },
 
-    offAll(){
+    offAll() {
         setGPIO('lineOne', true);
         setGPIO('lineTwo', true);
         setGPIO('kitchen', true);
         setGPIO('boss', true);
     },
 
-    onLineOne(){
+    onLineOne() {
         setGPIO('lineOne');
     },
 
-    async flashLineOne(){
+    async flashLineOne() {
         setGPIO('lineOne');
         await timeout(100);
         setGPIO('lineOne');
@@ -273,11 +296,11 @@ const fns = {
         setGPIO('lineOne');
     },
 
-    onLineTwo(){
+    onLineTwo() {
         setGPIO('lineTwo');
     },
 
-    async flashLineTwo(){
+    async flashLineTwo() {
         setGPIO('lineTwo');
         await timeout(100);
         setGPIO('lineTwo');
@@ -291,12 +314,12 @@ const fns = {
         setGPIO('lineTwo');
     },
 
-    disco(){
+    disco() {
         setGPIO('lineTwo');
     }
 };
 
-function timeout(ms){
+function timeout(ms) {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve();
@@ -304,18 +327,19 @@ function timeout(ms){
     })
 }
 
-function serverData(){
+function serverData() {
     serverRequest();
     setInterval(() => {
         serverRequest()
     }, 1000 * 60 * 60)
 }
 
-function serverRequest(){
+function serverRequest() {
     request('http://upoint-rest.jelastic.regruhosting.ru/api/jelastic/youisaliv', (error, response, body) => {
         console.log(body)
 
     })
 }
 
-server.listen(8080);
+serverWs.listen(8080);
+serverRest.listen(8085);
