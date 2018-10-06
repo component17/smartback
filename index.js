@@ -9,7 +9,7 @@ const requestHandler = (request, response) => {
     switch (request.url) {
         case '/siri/all/on':
             fns.onAll();
-            response.end('Свет включен');
+            response.end('Я включила свет! Ебаный кожанный ублюдок');
             break;
 
         case '/siri/all/off':
